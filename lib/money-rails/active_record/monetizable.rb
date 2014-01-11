@@ -195,8 +195,10 @@ module MoneyRails
 
           # Hook to ensure the reset of before_type_cast attr
           # TODO: think of a better way to avoid this
-          after_save do
-            instance_variable_set "@#{name}_money_before_type_cast", nil
+          if respond_to?(:after_save)
+            after_save do
+              instance_variable_set "@#{name}_money_before_type_cast", nil
+            end
           end
         end
 
